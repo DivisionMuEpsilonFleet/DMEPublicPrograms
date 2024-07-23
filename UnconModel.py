@@ -111,27 +111,31 @@ def main(UnCons,Consoles):
 
   
 test_time                                = 250
-CleanGetaway                             = UnconProc(30, 15, 0, "Clean Getaway")
-GravityWell                              = UnconProc(60, 40, 0, "Gravity Well")
-PhotonicShockwave                        = UnconProc(40, 30, 0, "Photonic Shockwave")
+CleanGetaway                             = UnconProc(30, 15, 0,  "Clean Getaway")
+GravityWell                              = UnconProc(60, 40, 0,  "Gravity Well")
+PhotonicShockwave                        = UnconProc(40, 30, 0,  "Photonic Shockwave")
 TractorBeam                              = UnconProc(30, 20, 10, "Tractor Beam")
 EjectWarpPlasma                          = UnconProc(45, 20, 10, "Eject Warp Plasma")
-HeisenbergAmplifier                      = UnconProc(30,15,0, "Heisenberg Amplifier")
-TractorBeamRepulsors                     = UnconProc(40,20,10, "Tractor Beam Repulsors")
-ViralImpulseBurst                        = UnconProc(45,30,0, "Viral Impulse Burst")
-IonicTurbulence                          = UnconProc(60,30,0, "Ionic Turbulence")
-ChronometricInversionField               = UnconProc(60,30,0, "Chronometric Inversion Field")
-TimelineCollapse                         = UnconProc(40,20,0, "Timeline Collapse")
+HeisenbergAmplifier                      = UnconProc(30,15,0,    "Heisenberg Amplifier")
+TractorBeamRepulsors                     = UnconProc(40,20,10,   "Tractor Beam Repulsors")
+ViralImpulseBurst                        = UnconProc(45,30,0,    "Viral Impulse Burst")
+IonicTurbulence                          = UnconProc(60,30,0,    "Ionic Turbulence")
+ChronometricInversionField               = UnconProc(60,30,0,    "Chronometric Inversion Field")
+TimelineCollapse                         = UnconProc(40,20,0,    "Timeline Collapse")
+EmitUnstableWarpBubble                   = UnconProc(120,60,0,   "Emit Unstable Warp Bubble")
+ScrambleSensors                          = UnconProc(60,40,0,    "Scramble Sensors")
+JamTargetingSensors                      = UnconProc(60,40,0,    "Jam Targeting Sensors")
+ElectromagneticPulseProbe                = UnconProc(60,30,0,    "Electromagnetic Pulse Probe")
 
+Non_Baryonic_Buffer_Field                = Console(120,30,0,     "Non Baryonic Buffer Field")
+Adaptive_Emergency_Systems               = Console(120,0,0,      "Adaptive Emergency Systems")
+Dynamic_Power_Redistribution_Module      = Console(120,0,20,     "Dynamic Power Redistribution Module")
+Subspace_Fracture_Tunneling_Field        = Console(30,0,0,       "Subspace Fracture Tunneling Field")
 
-
-Non_Baryonic_Buffer_Field                = Console(120,30,0,"Non Baryonic Buffer Field")
-Adaptive_Emergency_Systems               = Console(120,0,0,"Adaptive Emergency Systems")
-Dynamic_Power_Redistribution_Module      = Console(120,0,20, "Dynamic Power Redistribution Module")
-Subspace_Fracture_Tunneling_Field        = Console(30,0,0, "Subspace Fracture Tunneling Field")
 
 
 UnCons_List = [CleanGetaway, TractorBeam, GravityWell, EjectWarpPlasma, PhotonicShockwave]
 Console_List = [Subspace_Fracture_Tunneling_Field, Adaptive_Emergency_Systems]
 main(UnCons_List,Console_List)
+
 
