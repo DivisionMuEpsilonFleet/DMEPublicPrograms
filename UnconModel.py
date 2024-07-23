@@ -85,7 +85,6 @@ class Console:
         self.currentCD = self.currentCD - self.BaseCD*0.25
 
 def main(UnCons,Consoles):
-
     for t in range (0,test_time):
         UnConIterationCounter = 0
         for UnCon in UnCons:
@@ -100,13 +99,10 @@ def main(UnCons,Consoles):
                                             consoles_to_be_reduced_by_SFTF.apply_SFTF_Reduction()
                                         else: #If the console is SFTF, then just pass to avoid a reduction
                                             pass
-                
                 if t % UnCon.get_GCD() == 0: #Then t / GCD has no remainder, ie we get an uncon proc.
                     #print(UnCon.get_Name() + " Activated at " + str(t))
                     console.apply_uncon()
-                
                 console.elapse_time()
-
             UnConIterationCounter = UnConIterationCounter+1
 
   
@@ -137,5 +133,4 @@ Subspace_Fracture_Tunneling_Field        = Console(30,0,0,       "Subspace Fract
 UnCons_List = [CleanGetaway, TractorBeam, GravityWell, EjectWarpPlasma, PhotonicShockwave]
 Console_List = [Subspace_Fracture_Tunneling_Field, Adaptive_Emergency_Systems]
 main(UnCons_List,Console_List)
-
 
