@@ -99,22 +99,19 @@ def main(UnCons,Consoles):
     for t in range (0,test_time):
         UnConIterationCounter = 0
 
+        time_stamps_for_procs.append(t)
+        magnitude_of_uncon_procs.append(0)
+        magnitude_of_console_activations.append(0)  
+
         for UnCon in UnCons:
             for console in Consoles:
                 if(UnConIterationCounter == 0):
                     console.decrement_console_time()
                     console_name, console_was_triggered = console.try_trigger_console(t)
-
-                    time_stamps_for_procs.append(t)
-                    magnitude_of_uncon_procs.append(0)
-                    magnitude_of_console_activations.append(0)   
                                   
                     if(console_was_triggered == True):
                         magnitude_of_console_activations[len(magnitude_of_console_activations)-1] = magnitude_of_console_activations[len(magnitude_of_console_activations)-1] + 1
                     
-                    
-                        
-
                     if(console_name == "Subspace Fracture Tunneling Field" and console_was_triggered == True): #if SFTF was just activated
                                     for consoles_to_be_reduced_by_SFTF in Consoles:
                                         if (consoles_to_be_reduced_by_SFTF.get_Name() != "Subspace Fracture Tunneling Field"): #Ensure SFTF isn't reducing itself
@@ -122,6 +119,9 @@ def main(UnCons,Consoles):
                                         else: #If the console is SFTF, then just pass to avoid a reduction
                                             pass
                 if t % UnCon.get_GCD() == 0: #Then t / GCD has no remainder, ie we get an uncon proc.
+
+                    if(UnConIterationCounter == 0):
+                        magnitude_of_uncon_procs[len(magnitude_of_uncon_procs)-1] = magnitude_of_uncon_procs[len(magnitude_of_uncon_procs)-1] + 1
                     #print(UnCon.get_Name() + " Activated at " + str(t))
                     console.apply_uncon()
 
