@@ -119,6 +119,11 @@ EjectWarpPlasma                          = UnconProc(45, 20, 10, "Eject Warp Pla
 HeisenbergAmplifier                      = UnconProc(30,15,0, "Heisenberg Amplifier")
 TractorBeamRepulsors                     = UnconProc(40,20,10, "Tractor Beam Repulsors")
 ViralImpulseBurst                        = UnconProc(45,30,0, "Viral Impulse Burst")
+IonicTurbulence                          = UnconProc(60,30,0, "Ionic Turbulence")
+ChronometricInversionField               = UnconProc(60,30,0, "Chronometric Inversion Field")
+TimelineCollapse                         = UnconProc(40,20,0, "Timeline Collapse")
+
+
 
 Non_Baryonic_Buffer_Field                = Console(120,30,0,"Non Baryonic Buffer Field")
 Adaptive_Emergency_Systems               = Console(120,0,0,"Adaptive Emergency Systems")
