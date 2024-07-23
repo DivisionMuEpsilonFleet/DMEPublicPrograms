@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 test_time = 0
 # creating an empty canvas
 fig = plt.figure()
@@ -169,9 +170,9 @@ ax.set_zlabel("Number of Consoles Activated")
 #or RGBA
 
 
-
+col = np.arange(test_time)
 #Generates full data set
-ax.scatter3D(X, Y, Z)
+ax.scatter3D(X, Y, Z, c=col, marker='o')
 
 # Showing the above plot
 plt.show()
