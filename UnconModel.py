@@ -132,7 +132,7 @@ def main(UnCons,Consoles):
     return time_stamps_for_procs, magnitude_of_uncon_procs, magnitude_of_console_activations
 
   
-test_time                                = 250
+test_time                                = 1000
 CleanGetaway                             = UnconProc(30, 15, 0,  "Clean Getaway")
 GravityWell                              = UnconProc(60, 40, 0,  "Gravity Well")
 PhotonicShockwave                        = UnconProc(40, 30, 0,  "Photonic Shockwave")
@@ -154,8 +154,11 @@ Adaptive_Emergency_Systems               = Console(120,0,0,      "Adaptive Emerg
 Dynamic_Power_Redistribution_Module      = Console(120,0,20,     "Dynamic Power Redistribution Module")
 Subspace_Fracture_Tunneling_Field        = Console(30,0,0,       "Subspace Fracture Tunneling Field")
 
-UnCons_List = [CleanGetaway, TractorBeam, GravityWell, EjectWarpPlasma, PhotonicShockwave]
-Console_List = [Subspace_Fracture_Tunneling_Field, Adaptive_Emergency_Systems]
+
+UnCons_List = [CleanGetaway, TractorBeamRepulsors, ViralImpulseBurst]
+Console_List = [Adaptive_Emergency_Systems, Non_Baryonic_Buffer_Field, Dynamic_Power_Redistribution_Module]
+
+
 X, Y, Z = main(UnCons_List,Console_List)
 
 ax.set_xlabel("Time")
@@ -176,3 +179,4 @@ ax.scatter3D(X, Y, Z, c=col, marker='o')
 
 # Showing the above plot
 plt.show()
+
