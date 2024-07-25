@@ -99,18 +99,21 @@ def main(UnCons,Consoles):
 
     for t in range (0,test_time):
         UnConIterationCounter = 0
+        
 
         time_stamps_for_procs.append(t)
         magnitude_of_uncon_procs.append(0)
         magnitude_of_console_activations.append(0)  
 
         for UnCon in UnCons:
+
+            ConsoleIterationCounter = 0 #This store the number of times we are iterating through the console list, for some code we only want to do something once, not multiple times as we iterate through the console list, so we put this here. 
             for console in Consoles:
                 if(UnConIterationCounter == 0):
                     console.decrement_console_time()
                     console_name, console_was_triggered = console.try_trigger_console(t)
                                   
-                    if(console_was_triggered == True):
+                    if(console_was_triggered == True): #Testing if the console was triggered, and if it was incrementing the variable assoicated with that time which is storing if a console was triggered, and if one was, incrementing that variable by one. 
                         magnitude_of_console_activations[len(magnitude_of_console_activations)-1] = magnitude_of_console_activations[len(magnitude_of_console_activations)-1] + 1
                     
                     if(console_name == "Subspace Fracture Tunneling Field" and console_was_triggered == True): #if SFTF was just activated
@@ -120,14 +123,14 @@ def main(UnCons,Consoles):
                                         else: #If the console is SFTF, then just pass to avoid a reduction
                                             pass
                 if t % UnCon.get_GCD() == 0: #Then t / GCD has no remainder, ie we get an uncon proc.
-
-                    if(UnConIterationCounter == 0):
+                    if(ConsoleIterationCounter == 0): #This way we won't get model which increments this counter for every console which is affected
                         magnitude_of_uncon_procs[len(magnitude_of_uncon_procs)-1] = magnitude_of_uncon_procs[len(magnitude_of_uncon_procs)-1] + 1
-                    #print(UnCon.get_Name() + " Activated at " + str(t))
                     console.apply_uncon()
 
                 console.elapse_time()
+                ConsoleIterationCounter = ConsoleIterationCounter + 1
             UnConIterationCounter = UnConIterationCounter+1
+
 
     return time_stamps_for_procs, magnitude_of_uncon_procs, magnitude_of_console_activations
 
@@ -155,7 +158,7 @@ Dynamic_Power_Redistribution_Module      = Console(120,0,20,     "Dynamic Power 
 Subspace_Fracture_Tunneling_Field        = Console(30,0,0,       "Subspace Fracture Tunneling Field")
 
 
-UnCons_List = [CleanGetaway, TractorBeamRepulsors, ViralImpulseBurst]
+UnCons_List = [CleanGetaway, TractorBeamRepulsors, ViralImpulseBurst, EjectWarpPlasma, EmitUnstableWarpBubble, IonicTurbulence]
 Console_List = [Adaptive_Emergency_Systems, Non_Baryonic_Buffer_Field, Dynamic_Power_Redistribution_Module]
 
 
@@ -179,4 +182,3 @@ ax.scatter3D(X, Y, Z, c=col, marker='o')
 
 # Showing the above plot
 plt.show()
-
