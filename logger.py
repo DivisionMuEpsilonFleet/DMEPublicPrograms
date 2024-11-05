@@ -9,6 +9,7 @@ import string
   
 keys = []
 start_time = time.time()
+CURRENT_TIME = 0
 
 def on_press(key):
      
@@ -21,6 +22,10 @@ def on_press(key):
          
     except AttributeError:
        print('special key {0} pressed'.format(key))
+
+def update_current_time():
+      global CURRENT_TIME
+      CURRENT_TIME = time.time()
 
 def check_special_keys(k):
     if(k == "!"):
@@ -67,19 +72,19 @@ def check_special_keys(k):
          return k
           
 def write_file(key): #key may not always be a 'Key' Object, it may also be a string such as in the case of the mosue listener. 
+    update_current_time()
     set_log_entry_event_length_limiter = 35 #used to format the log so that we can easily read it. This is *fixed* length all log entries will be. 
     with open('Keyboard_Inputs_Log.log', 'a') as f: #original code had it re-write the entire file each time with a list, which seemed very in-efficient and like it would cause memory issues. I am not sure though, how this append works. If it accepts the entire .txt file into memory, the original implemention might have been superior. 
        # removing ''
        k = str(key).replace("'", "")
        k = check_special_keys(k)
-       ts = time.time()
 
        if((len(k) < set_log_entry_event_length_limiter)): #only doing this to format the k string to be set_log_entry_event_length_limiter chars long
               for i in range(0,set_log_entry_event_length_limiter-len(k)): #if string is < set_log_entry_event_length_limiter long, then we will fill it up with a bunch of extra white spaces to format it for the log file. 
                     k = k+" "
        if(len(k)> set_log_entry_event_length_limiter):
              k = k[0:set_log_entry_event_length_limiter] #ensures that very large strings will simply be trimmed to fit the desired length of a log entry
-       f.write("\n   " + k + " - Time: " + ("%.7f" % round(ts-start_time, 2)) ) #only need so much data here about the time stamps, and this will be a 'greedy' source of storage for the log file
+       f.write("\n   " + k + " - Time: " + ("%.7f" % round(CURRENT_TIME-start_time, 2)) ) #only need so much data here about the time stamps, and this will be a 'greedy' source of storage for the log file
        # explicitly adding a space after 
        # every keystroke for readability
        f.write(' ') 
