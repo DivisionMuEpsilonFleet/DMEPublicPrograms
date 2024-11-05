@@ -1,6 +1,8 @@
 import pynput
 from pynput.keyboard import Key, Listener
+from datetime import datetime
 import time
+import pyuac
   
 keys = []
 start_time = time.time()
@@ -11,7 +13,8 @@ def on_press(key):
     write_file(key)
      
     try:
-       print('alphanumeric key {0} pressed'.format(key.char))
+       #print('alphanumeric key {0} pressed'.format(key.char))
+       pass #no need to bring things out when things are working fine, increases runtime
          
     except AttributeError:
        print('special key {0} pressed'.format(key))
@@ -51,7 +54,7 @@ def check_special_keys(k):
             global start_time  #ugly but it works and I don't care enough
             start_time = time.time()
             with open('log.txt', 'w') as f:
-                  f.write("Video Synchronization Marker")
+                  f.write("Logging Session On: " + str(datetime.now()) +  " Local Time Zone" + "\nVideo Synchronization Marker")
             return "| Video Synchronization Marker"
     
     else:
@@ -70,17 +73,26 @@ def write_file(key):
                     k = k+" "
        if(len(k)> set_log_entry_event_length_limiter):
              k = k[0:set_log_entry_event_length_limiter] #ensures that very large strings will simply be trimmed to fit the desired length of a log entry
-       f.write("\n" + k + " - Time: " + ("%.5f" % round(ts-start_time, 2)) ) #only need so much data here about the time stamps, and this will be a 'greedy' source of storage for the log file
+       f.write("\n   " + k + " - Time: " + ("%.7f" % round(ts-start_time, 2)) ) #only need so much data here about the time stamps, and this will be a 'greedy' source of storage for the log file
        # explicitly adding a space after 
        # every keystroke for readability
        f.write(' ') 
                          
 def on_release(key):          
-    print('{0} released'.format(key))
-    if key == Key.esc:
+    #print('{0} released'.format(key))
+    if key == Key.page_down:
         # Stop listener
         return False
-  
-with Listener(on_press = on_press,
+
+#Running as Admin is nessecary in many games for whatever unknown reason. Cursory research seems to indicate issues with DirectX and Windows but honestly who knows :shrugs_non-chalantly:
+def main():
+       with Listener(on_press = on_press,
               on_release = on_release) as listener:
-    listener.join()
+              listener.join()
+
+if __name__ == "__main__":
+    if not pyuac.isUserAdmin():
+        print("Re-launching as admin!")
+        pyuac.runAsAdmin()
+    else:        
+        main()  # Already an admin here.
