@@ -1,9 +1,9 @@
-lass Player:
+class Player:
     Name = ""
-    Wins = 0
-    Losses = 0
-    WeightedWins   = 0
-    WeightedLosses = 0
+    Wins = 1
+    Losses = 1
+    WeightedWins   = 1
+    WeightedLosses = 1
 
 
     def __init__(self, name, wins, losses,wwins,wlosses):
@@ -18,19 +18,23 @@ lass Player:
     Using outcome as 1 if it was a win, -1 if a loss, 0 is a tie
     """
     def update_player(self, outcome, enemy_comptence_multiplier,team_competence_multiplier):
-        self.Wins              = self.Wins +        outcome
-        self.Losses            = self.Wins + (-1) * outcome
-        self.WeightedWins      = self.Wins +        outcome * (enemy_comptence_multiplier / team_competence_multiplier)
-        self.WeightedLosses    = self.Wins + (-1) * outcome * (enemy_comptence_multiplier / team_competence_multiplier)
+        if(outcome > 0):
+            self.Wins           = self.Wins           + 1
+            self.WeightedWins   = self.WeightedWins   + 1 * (enemy_comptence_multiplier / team_competence_multiplier)
+        elif(outcome < 0):
+            self.Losses         = self.Losses         + 1
+            self.WeightedLosses = self.WeightedLosses + 1 * (enemy_comptence_multiplier / team_competence_multiplier)
 
     def get_winloss(self):
-        try: #to avoid division by zero error
-            return (self.WeightedWins)/(self.WeightedLosses)
-        except:
-            return 1
+        return int(1000*(self.WeightedWins)/(self.WeightedLosses))/1000
+        
+        
+    def get_wl(self):
+        return int(1000*(self.Wins)/(self.Losses))/1000
+        
         
     def get_player_name(self):
-        print(self.Name)
+        return self.Name
     
 
 
@@ -62,7 +66,6 @@ class MatchRound:
 
     def update_teams(self):
         red_team_competence, blue_team_competence = self.calculate_mean_team_competence() #calculates mean competence of enemy team
-        
         red_team_size = len(self.red_team)
         for red_index in range(0, red_team_size):
             self.red_team[red_index].update_player  ( 1*self.OutcomeValue  , blue_team_competence, red_team_competence)
