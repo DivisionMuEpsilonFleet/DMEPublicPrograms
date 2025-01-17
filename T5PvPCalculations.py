@@ -15,18 +15,14 @@ class Player:
     """
     Using outcome as 1 if it was a win, -1 if a loss, 0 is a tie
     """
-    def update_player(self, outcome, enemy_comptence_multiplier):
-        self.Wins         = self.Wins +        outcome
-        self.Losses       = self.Wins + (-1) * outcome
-        self.WeightedWins = self.Wins +        outcome * enemy_comptence_multiplier
-        self.WeightedLosses    = self.Wins + (-1) * outcome * enemy_comptence_multiplier
+    def update_player(self, outcome, enemy_comptence_multiplier,team_competence_multiplier):
+        self.Wins              = self.Wins +        outcome
+        self.Losses            = self.Wins + (-1) * outcome
+        self.WeightedWins      = self.Wins +        outcome * (enemy_comptence_multiplier / team_competence_multiplier)
+        self.WeightedLosses    = self.Wins + (-1) * outcome * (enemy_comptence_multiplier / team_competence_multiplier)
 
     def get_winloss(self):
         return (self.WeightedWins)/(self.WeightedLosses)
-
-
-
-
 
 class MatchRound:
     red_team    = []
@@ -63,8 +59,8 @@ class MatchRound:
         
         red_team_size = len(self.red_team)
         for red_player in range(0, red_team_size):
-            red_player.update_player  ( 1*self.OutcomeValue  , blue_team_competence)
+            red_player.update_player  ( 1*self.OutcomeValue  , blue_team_competence, red_team_competence)
        
         blue_team_size = len(self.blue_team)
         for blue_player in range(0,blue_team_size):
-            blue_player.update_player ( -1*self.OutcomeValue , red_team_competence)
+            blue_player.update_player ( -1*self.OutcomeValue , red_team_competence, blue_team_competence)
