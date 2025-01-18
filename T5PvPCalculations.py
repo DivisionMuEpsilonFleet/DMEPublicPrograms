@@ -33,7 +33,7 @@ def partition_teams(input_players_list):
         if(left_competence > right_competence):
             right_team.append(input_players_list[plyers_number-1]) 
         else:
-            left_competence.append(input_players_list[plyers_number-1])
+            left_team.append(input_players_list[plyers_number-1])
     return left_team, right_team
 
 
@@ -165,3 +165,6 @@ Various Commands
 #players_sort(PLAYERS) would be to sort player rankings
 #suggest_teams(PLAYERS) suggest teams based on total player pools
 #suggest_teams(PLAYERS[0:x] + PLAYERS[y,z]) suggest teams based subset of total player pools broken into two groups, can use multiple + to look at different players
+Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    0)
+Match0.update_teams()
+suggest_teams(PLAYERS)
