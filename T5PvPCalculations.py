@@ -1,31 +1,38 @@
+def print_outcomes():
+    for k in PLAYERS:
+        print(str(k.get_player_name() + " Scaled W/L ") +  str(k.get_winloss()) + " Normal W/L "  + str(k.get_wl()))
+
+
 class Player:
     Name = ""
-    Wins = 1
-    Losses = 1
+    Wins           = 1
+    Losses         = 1
     WeightedWins   = 1
     WeightedLosses = 1
 
 
-    def __init__(self, name, wins, losses,wwins,wlosses):
-        self.Name           = name
-        self.Wins           = wins
-        self.Losses         = losses
-        self.WeightedWins   = wwins
-        self.WeightedLosses = wlosses
+    def __init__(self, name):
+        self.Name = name
+        pass
     
 
     """
     Using outcome as 1 if it was a win, -1 if a loss, 0 is a tie
     """
     def update_player(self, outcome, enemy_comptence_multiplier,team_competence_multiplier):
+        total_games_played = self.Wins + self.Losses
+
         if(outcome > 0):
             self.Wins           = self.Wins           + 1
-            self.WeightedWins   = self.WeightedWins   + 1 * (enemy_comptence_multiplier / team_competence_multiplier)
+            self.WeightedWins   = self.WeightedWins   + 1 * (enemy_comptence_multiplier / team_competence_multiplier)  *  (total_games_played/(total_games_played+2))
         elif(outcome < 0):
             self.Losses         = self.Losses         + 1
-            self.WeightedLosses = self.WeightedLosses + 1 * (enemy_comptence_multiplier / team_competence_multiplier)
+            self.WeightedLosses = self.WeightedLosses + 1 * (enemy_comptence_multiplier / team_competence_multiplier)  *  (total_games_played/(total_games_played+2))
+
 
     def get_winloss(self):
+
+
         return int(1000*(self.WeightedWins)/(self.WeightedLosses))/1000
         
         
