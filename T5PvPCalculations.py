@@ -152,7 +152,7 @@ Chikanhu = Player("Chikanhu")
 Darthon  = Player("Darthon")
 Bret     = Player("Bret")
 PLAYERS = [ Cole, Saterk, Poldi, Tazzy, Chikanhu, Darthon, Bret]
-
+CURRENT_MATCH = []
 
 
 '''
@@ -165,6 +165,13 @@ Various Commands
 #players_sort(PLAYERS) would be to sort player rankings
 #suggest_teams(PLAYERS) suggest teams based on total player pools
 #suggest_teams(PLAYERS[0:x] + PLAYERS[y,z]) suggest teams based subset of total player pools broken into two groups, can use multiple + to look at different players
+
+#Previous Fights Logs
 Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    0)
 Match0.update_teams()
-suggest_teams(PLAYERS)
+Match1   = MatchRound( [Tazzy, Poldi, Chikanhu]  , [Cole, Bret, Darthon],    0)
+Match1.update_teams()
+
+#update CURRENT_MATCH to be the list of all players competing in the current round
+CURRENT_MATCH = PLAYERS
+suggest_teams(CURRENT_MATCH)
