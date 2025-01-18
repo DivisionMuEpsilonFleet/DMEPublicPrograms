@@ -1,3 +1,4 @@
+import sys
 def print_outcomes(players):
     for k in players:
         print(str(k.get_player_name() + " Scaled W/L ") +  str(k.get_winloss()) + " Normal W/L "  + str(k.get_wl()))
@@ -111,7 +112,15 @@ class MatchRound:
     def __init__(self, red_team, blue_team, OutcomeValue):
         self.red_team     = red_team
         self.blue_team    = blue_team
-        self.OutcomeValue = OutcomeValue
+
+        if(OutcomeValue == 'left'):
+            self.OutcomeValue = 1
+        elif(OutcomeValue == 'right'):
+            self.OutcomeValue = -1
+        elif(OutcomeValue == 'draw'):
+            self.OutcomeValue = 0
+        else:
+            sys.exit(_ExitCode = "Improperly Formatted Results")
 
     def calculate_mean_team_competence(self):
         red_team_size = len(self.red_team)
@@ -139,11 +148,6 @@ class MatchRound:
         for blue_index in range(0,blue_team_size):
             self.blue_team[blue_index].update_player ( -1*self.OutcomeValue , red_team_competence, blue_team_competence)
 
-"""
-
-"""
-
-
 Cole     = Player("Cole")
 Saterk   = Player("Saterk")
 Poldi    = Player("Poldi")
@@ -152,13 +156,13 @@ Chikanhu = Player("Chikanhu")
 Darthon  = Player("Darthon")
 Bret     = Player("Bret")
 PLAYERS = [ Cole, Saterk, Poldi, Tazzy, Chikanhu, Darthon, Bret]
-CURRENT_MATCH = []
+CURRENT_MATCH_PLAYERS = []
 
 
 '''
 Various Commands
 '''
-#left [ ] is one team, right [ ] is another team, 1 signals left [ ] won the round, -1 signals right [ ] won, 0 indicates a draw
+#left [ ] is one team, right [ ] is another team, 'left' signals left [ ] won the round, 'right' signals right [ ] won, 'draw' indicates a draw
 #Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    0) 
 #Match0.update_teams() would be used to update rankings
 #print_outcomes(PLAYERS) would be display rankings, no sorting
@@ -167,11 +171,13 @@ Various Commands
 #suggest_teams(PLAYERS[0:x] + PLAYERS[y,z]) suggest teams based subset of total player pools broken into two groups, can use multiple + to look at different players
 
 #Previous Fights Logs
-Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    0)
+Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    'left')
 Match0.update_teams()
-Match1   = MatchRound( [Tazzy, Poldi, Chikanhu]  , [Cole, Bret, Darthon],    0)
-Match1.update_teams()
 
 #update CURRENT_MATCH to be the list of all players competing in the current round
-CURRENT_MATCH = PLAYERS
-suggest_teams(CURRENT_MATCH)
+CURRENT_MATCH_PLAYERS = [Bret, Darthon, Chikanhu, Poldi]
+suggest_teams(CURRENT_MATCH_PLAYERS)
+
+#do not edit below this line!, this just gives current rankings going into the next round
+print("\nCurrent Rankings:\n")
+list_players(players_sort(PLAYERS), "RANKINGS")
