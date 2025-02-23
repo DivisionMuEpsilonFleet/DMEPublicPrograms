@@ -148,14 +148,27 @@ class MatchRound:
         for blue_index in range(0,blue_team_size):
             self.blue_team[blue_index].update_player ( -1*self.OutcomeValue , red_team_competence, blue_team_competence)
 
-Cole     = Player("Cole")
-Saterk   = Player("Saterk")
-Poldi    = Player("Poldi")
-Tazzy    = Player("Tazzy")
-Chikanhu = Player("Chikanhu")
-Darthon  = Player("Darthon")
-Bret     = Player("Bret")
-PLAYERS = [ Cole, Saterk, Poldi, Tazzy, Chikanhu, Darthon, Bret]
+Cole         = Player("Cole")
+Saterk       = Player("Saterk")
+Poldi        = Player("Poldi")
+Tazzy        = Player("Tazzy")
+Chikanhu     = Player("Chikanhu")
+Darthon      = Player("Darthon")
+Bret         = Player("Bret")
+Van          = Player("Van")
+Naevius      = Player("Naevius")
+Kerrus       = Player("Kerrus")
+Arcane       = Player("Arcane")
+Konvaliya    = Player("Konvaliya")
+DoctorD      = Player("DoctorD")
+Jimmy        = Player("Jimmy")
+Kilgress     = Player("Kilgress")
+AlexJuno     = Player("AlexJuno")
+Cass_Sedai   = Player("Cass_Sedai")
+WhereSausage = Player("Where The Sausage Gone?")
+McRomeo = Player("McRomeo")
+
+PLAYERS = [ Cole, Saterk, Poldi, Tazzy, Chikanhu, Darthon, Bret, Van, Naevius, Kerrus, Arcane, Konvaliya, DoctorD, Jimmy, Kilgress, AlexJuno, Cass_Sedai]
 CURRENT_MATCH_PLAYERS = []
 
 
@@ -171,11 +184,44 @@ Various Commands
 #suggest_teams(PLAYERS[0:x] + PLAYERS[y,z]) suggest teams based subset of total player pools broken into two groups, can use multiple + to look at different players
 
 #Previous Fights Logs
-Match0   = MatchRound( [Tazzy, Saterk, Poldi]  , [Cole, Chikanhu, Darthon],    'left')
-Match0.update_teams()
+
+#Day 1
+Match1   = MatchRound( [Konvaliya, Cole, Van, Darthon, Kerrus]  , [Tazzy, Jimmy, Arcane, DoctorD, Bret, Naevius],    'left')
+Match1.update_teams()
+
+Match2   = MatchRound( [Bret, Arcane, Jimmy, Chikanhu, Cole, Van, Konvaliya]  , [Tazzy, Naevius, DoctorD, Kilgress, AlexJuno, Darthon, Kerrus],    'left')
+Match2.update_teams()
+
+Match3   = MatchRound( [Naevius, AlexJuno, Kerrus, Arcane, Chikanhu, Cole, Konvaliya]  , [Tazzy, DoctorD, Darthon, Bret, Jimmy],    'left')
+Match3.update_teams()
+
+Match4   = MatchRound( [DoctorD, Bret, Naevius, Kerrus, Cole], [Tazzy, Darthon, Jimmy, AlexJuno, Arcane, Konvaliya],   'right')
+Match4.update_teams()
+
+Match5   = MatchRound( [Naevius, Darthon, AlexJuno, Arcane], [Bret, Tazzy, Jimmy, Cole, Konvaliya],   'right')
+Match5.update_teams()
+
+Match6   = MatchRound( [Tazzy, Darthon, Cole, Arcane, Konvaliya], [Naevius, Bret, AlexJuno, Chikanhu],   'left')
+Match6.update_teams()
+
+
+#Day 2
+
+Match7   = MatchRound( [Bret, AlexJuno, Tazzy, Jimmy, Cass_Sedai], [Naevius, AlexJuno, Kerrus, Cole, Arcane],   'left')
+Match7.update_teams()
+
+Match8   = MatchRound( [Cole, Arcane, Bret, Naevius, Cass_Sedai, Kilgress], [Konvaliya, Tazzy, Jimmy, Darthon, AlexJuno, Kerrus],   'right')
+Match8.update_teams()
+
+Match9   = MatchRound( [Bret, Kerrus, AlexJuno, Darthon, Jimmy], [Naevius, Arcane, AlexJuno, Cass_Sedai, Tazzy, Konvaliya],   'left')
+Match9.update_teams()
+
+Match10   = MatchRound( [Arcane, Bret, AlexJuno, McRomeo, Kerrus, Jimmy], [Naevius, Cass_Sedai, Chikanhu, AlexJuno, Tazzy, Darthon, Konvaliya],   'left')
+Match10.update_teams()
+
 
 #update CURRENT_MATCH to be the list of all players competing in the current round
-CURRENT_MATCH_PLAYERS = [Bret, Darthon, Chikanhu, Poldi]
+CURRENT_MATCH_PLAYERS = [Naevius, AlexJuno, Arcane, Tazzy, Bret, Jimmy, AlexJuno, Cass_Sedai, Kerrus, Konvaliya, Darthon, Chikanhu, McRomeo]
 suggest_teams(CURRENT_MATCH_PLAYERS)
 
 #do not edit below this line!, this just gives current rankings going into the next round
